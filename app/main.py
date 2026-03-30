@@ -6,13 +6,13 @@ def cache(func: Callable) -> Callable:
     storage = {}
 
     @functools.wraps(func)
-    def wrapper(*args: Any) -> Any:
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         if args in storage:
             print("Getting from cache")
             return storage[args]
 
         print("Calculating new result")
-        result = func(*args)
+        result = func(*args, **kwargs)
         storage[args] = result
         return result
 
